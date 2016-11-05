@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
+title: 向日葵园子
+subtitle: 这里是左手的向日葵园子，结满了知识的果实
 description:
 author: John Doe
 language:
@@ -71,3 +71,10 @@ theme: maupassant
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
+
+# 友情锭接
+# title, chinese available
+links_title: Links
+# links
+links:
+  山岭小小: http://note.hackrole.com/
