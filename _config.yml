@@ -6,9 +6,9 @@
 title: 向日葵园子
 subtitle: 这里是左手的向日葵园子，结满了知识的果实
 description:
-author: John Doe
-language:
-timezone:
+author: lccf
+language: en
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -77,4 +77,5 @@ deploy:
 links_title: Links
 # links
 links:
-  山岭小小: http://note.hackrole.com/
+  - title: 山岭小小
+    url: http://note.hackrole.com/
