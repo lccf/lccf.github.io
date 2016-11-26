@@ -81,3 +81,16 @@ links_title: Links
 links:
   - title: 山岭小小
     url: http://note.hackrole.com/
+# 静态文件版本
+version: 1.0.1
+# rss路径
+# rss: /atom.xml
+
+#RSS订阅
+plugin:
+- hexo-generator-feed
+#Feed Atom
+feed:
+type: atom
+path: atom.xml
+limit: 20
