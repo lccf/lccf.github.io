@@ -71,8 +71,11 @@ theme: maupassant
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:lccf/lccf.github.io.git
-  branch: master
+  repo:
+    github: git@github.com:lccf/lccf.github.io.git,master
+    coding: git@git.coding.net:lccf/lccf.coding.me.git,master
+  # repo: git@github.com:lccf/lccf.github.io.git
+  # branch: master
 
 # 友情锭接
 # title, chinese available
