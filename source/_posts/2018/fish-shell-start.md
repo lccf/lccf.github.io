@@ -9,7 +9,7 @@ tags:
 categories: Linux
 ---
 
-切换到fish有一段时间了，换fish之后terminal启动和新开tab速度明显加快。将fish和一些常用shell工具的配置整理出来。
+从bash切换到fish有一段时间了，换fish之后terminal启动和新开tab速度明显加快。整理一下fish和一些常用shell工具的配置。
 
 ### 安装
 
@@ -174,3 +174,9 @@ function fish_user_key_bindings
 end
 # cancel key bindings: fish_default_key_bindings
 ```
+
+### 链接
+fish shell https://github.com/fish-shell/fish-shell
+fisherman https://github.com/fisherman/fisherman
+autojump https://github.com/wting/autojump
+fzf https://github.com/junegunn/fzf
