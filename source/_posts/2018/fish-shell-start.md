@@ -120,6 +120,7 @@ set fish_greeting 'Talk is cheap. Show me the code.'
 
 # nvm
 set -xg NVM_DIR "$HOME/.nvm"
+set -xg NVM_PATH "/usr/local/opt/nvm"
 set -xg NVM_NODEJS_ORG_MIRROR "https://npm.taobao.org/dist"
 set -xg NODE_PATH "$NVM_DIR/versions/node/v8.9.3/lib/node_modules"
 set -xg HOMEBREW_BOTTLE_DOMAIN http://7xkcej.dl1.z0.glb.clouddn.com
@@ -153,6 +154,9 @@ alias fls='ls | fzf --height 50% --reverse --border'
 # abbr gbr 'g br'
 # abbr glg 'g lg'
 # abbr gla 'g lga'
+# abbr gpu 'g push'
+# abbr gpl 'g pull'
+# abbr c clear
 
 #function fish_user_key_bindings
 #  bind \cr 'peco_select_history (commandline -b)'
@@ -168,7 +172,7 @@ function fish_user_key_bindings
   fish_vi_key_bindings
   fzf_key_bindings
   for mode in insert default visual
-      bind -M $mode \ce accept-autosuggestion
+      bind -M $mode \ce end-of-line
       bind -M $mode \ca beginning-of-line
   end
 end
