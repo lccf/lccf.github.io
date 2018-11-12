@@ -9,7 +9,7 @@ tags:
 categories: Linux
 ---
 
-从bash切换到fish有一段时间了，换fish之后terminal启动和新开tab速度明显加快。整理一下fish和一些常用shell工具的配置。
+从bash切换到fish有一段时间了，换fish之后terminal启动和新开tab速度明显加快。整理一下fish和一些常用shell工具的配置(2018-11-12更新fisher版本)。
 
 * 2018-11-12 fishermen作者删除了fisherman的项目组织，文档相应更新，并更新插件
 
@@ -31,7 +31,7 @@ brew install fish
 chsh -s /usr/local/bin/fish
 ```
 
-3.安装fisherman
+3.安装fisher
 ```bash
 curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
 ```
@@ -40,11 +40,13 @@ curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fi
 
 4.安装插件
 ```bash
-fisher add edc/bass jorgebucaran/fish-git-util oh-my-fish/theme-default jethrokuan/fzf daenney/rbenv FabioAntunes/fish-nvm danhper/fish-fastdir jhillyerd/plugin-git
+fisher add edc/bass jorgebucaran/fish-git-util oh-my-fish/theme-default \
+jethrokuan/fzf daenney/rbenv FabioAntunes/fish-nvm \
+danhper/fish-fastdir jhillyerd/plugin-git
 ```
 - edc/bass 可以fish中执行bash
 - jorgebucaran/fish-git-util 基础方法，供主题中展示git信息，是oh-my-fish/theme-default的依赖
-- omf/theme-default主题插件，提供友好的信息显示
+- oh-my-fish/theme-default 主题插件，提供友好的信息显示
 - jethrokuan/fzf 但供fzf快捷键映射
 - daenney/rbenv 提供rbenv命令支持（ruby开发者使用）
 - FabioAntunes/fish-nvm 提供nvm支持（nodejs开发者使用）
