@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-01T11:35:49.797Z</updated>
+  <updated>2019-05-01T11:39:40.946Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com//2019/05/alpine%E7%BC%96%E8%AF%91php5-6/"/>
     <id>http://yoursite.com//2019/05/alpine编译php5-6/</id>
     <published>2019-05-01T10:30:00.000Z</published>
-    <updated>2019-05-01T11:35:49.797Z</updated>
+    <updated>2019-05-01T11:39:40.946Z</updated>
     
-    <content type="html"><![CDATA[<p>一些老代码还跑在php5.6的版本上，homebrew已经不支持5.6了打算迁移到docker上。php5.6的版本需要安装redis、memcached、xdebug的扩展，nginx添加了nginx-http-concat的插件。网上没有找到合适的docker脚本自己花了点时间来编译，脚本已上github <a href="https://github.com/lccf/alpine-php56" target="_blank" rel="noopener">https://github.com/lccf/alpine-php56</a></p><h3 id="编译说明"><a href="#编译说明" class="headerlink" title="编译说明"></a>编译说明</h3><p>软件版本</p><ul><li>alpine 3.8</li><li>php 5.6.40</li><li>nginx 1.15.12</li></ul><p>编译中有很多试错的过程，为节省时间，分成了几个版本，出错后不用从头开始编译。</p><ul><li>alpine 设置时区，做基础alpine镜像</li><li>php-base 编译后的php，没有添加扩展</li><li>php-ext 添加了pdo_mysql、bcmath、intl、gd、opcache、redis、xdebug、memcached待扩展</li><li>php-nginx 编译nginx，添中nginx扩展，设置启动脚本 </li></ul><p>按照先后顺序，执行build.sh脚本进行编译。</p><p>php编译脚本是从docker-library/php项目修改来的，最新版本已经移除5.6了，需要切换到fab49d4的commit。默认是在dockerfile下载php安装包的，国外网络环境速度比较慢，改为build脚本下载，也可以手动下载好，编译的时候节省时间。</p><p>php插件安装的脚本是docker-library/php自带的，使用起来比较方便。但是安装php扩展装的依赖库体积增加了50MB，目前还没有好的解决办法。</p><p>nginx脚本是从nginxinc/docker-nginx项目修改来，添加了nginx-http-concat插件。nginx-http-concat项目上release版本有问题，需要下载master分支的源码。</p><h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h3><p>默认项目目录 /var/www 启用时默认开启nginx和php。</p><p>示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -d --name php5 \</span><br><span class="line">    -p 80:80 \</span><br><span class="line">    -v /workdir/conf:/etc/nginx/conf.d \</span><br><span class="line">    -v /workdir/www:/var/www \</span><br><span class="line">    dev/php-nginx:1.15</span><br></pre></td></tr></table></figure></p><h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><ul><li>docker-library/docker-php <a href="https://github.com/docker-library/php/commit/fab49d4cb1c61e4f74c2dffe06961408212f054c" target="_blank" rel="noopener">https://github.com/docker-library/php/commit/fab49d4cb1c61e4f74c2dffe06961408212f054c</a></li><li>nginxinc/docker-nginx <a href="https://github.com/nginxinc/docker-nginx" target="_blank" rel="noopener">https://github.com/nginxinc/docker-nginx</a></li></ul>]]></content>
+    <content type="html"><![CDATA[<p>一些老代码还跑在php5.6的版本上，homebrew已经不支持5.6了打算迁移到docker上。php5.6的版本需要安装redis、memcached、xdebug的扩展，nginx添加了nginx-http-concat的插件。网上没有找到合适的docker脚本自己花了点时间来编译，脚本已上github <a href="https://github.com/lccf/alpine-php56" target="_blank" rel="noopener">https://github.com/lccf/alpine-php56</a></p><h3 id="编译说明"><a href="#编译说明" class="headerlink" title="编译说明"></a>编译说明</h3><p>软件版本</p><ul><li>alpine 3.8</li><li>php 5.6.40</li><li>nginx 1.15.12</li></ul><p>编译中有很多试错的过程，为节省时间，分成了几个版本，出错后不用从头开始编译。</p><ul><li>alpine 设置时区，做基础alpine镜像</li><li>php-base 编译后的php，没有添加扩展</li><li>php-ext 添加了pdo_mysql、bcmath、intl、gd、opcache、redis、xdebug、memcached等扩展</li><li>php-nginx 编译nginx，添中nginx扩展，设置启动脚本 </li></ul><p>按照先后顺序，执行build.sh脚本进行编译。</p><p>php编译脚本是从docker-library/php项目修改来的，最新版本已经移除5.6了，需要切换到fab49d4的commit。默认是在dockerfile下载php安装包的，国外网络环境速度比较慢，改为build脚本下载，也可以手动下载好，编译的时候节省时间。</p><p>php插件安装的脚本是docker-library/php自带的，使用起来比较方便。但是安装php扩展装的依赖库体积增加了50MB，目前还没有好的解决办法。</p><p>nginx脚本是从nginxinc/docker-nginx项目修改来，添加了nginx-http-concat插件。nginx-http-concat项目上release版本有问题，需要下载master分支的源码。</p><h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h3><p>默认项目目录 /var/www 启用时默认开启nginx和php。</p><p>示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -d --name php5 \</span><br><span class="line">    -p 80:80 \</span><br><span class="line">    -v /workdir/conf:/etc/nginx/conf.d \</span><br><span class="line">    -v /workdir/www:/var/www \</span><br><span class="line">    dev/php-nginx:1.15</span><br></pre></td></tr></table></figure></p><h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><ul><li>docker-library/docker-php <a href="https://github.com/docker-library/php/commit/fab49d4cb1c61e4f74c2dffe06961408212f054c" target="_blank" rel="noopener">https://github.com/docker-library/php/commit/fab49d4cb1c61e4f74c2dffe06961408212f054c</a></li><li>nginxinc/docker-nginx <a href="https://github.com/nginxinc/docker-nginx" target="_blank" rel="noopener">https://github.com/nginxinc/docker-nginx</a></li></ul>]]></content>
     
     <summary type="html">
     
@@ -39,13 +39,13 @@
     
       <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
     
-      <category term="php" scheme="http://yoursite.com/tags/php/"/>
-    
       <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
     
       <category term="alpine" scheme="http://yoursite.com/tags/alpine/"/>
     
       <category term="nginx" scheme="http://yoursite.com/tags/nginx/"/>
+    
+      <category term="php" scheme="http://yoursite.com/tags/php/"/>
     
   </entry>
   
@@ -386,13 +386,13 @@
     
       <category term="websharp" scheme="http://yoursite.com/tags/websharp/"/>
     
-      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
-    
-      <category term="autocommand" scheme="http://yoursite.com/tags/autocommand/"/>
-    
       <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
       <category term="coffee" scheme="http://yoursite.com/tags/coffee/"/>
+    
+      <category term="autocommand" scheme="http://yoursite.com/tags/autocommand/"/>
     
       <category term="uglifyjs" scheme="http://yoursite.com/tags/uglifyjs/"/>
     
@@ -425,8 +425,6 @@
     
       <category term="websharp" scheme="http://yoursite.com/tags/websharp/"/>
     
-      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
       <category term="sass" scheme="http://yoursite.com/tags/sass/"/>
     
       <category term="sass技巧" scheme="http://yoursite.com/tags/sass%E6%8A%80%E5%B7%A7/"/>
@@ -434,6 +432,8 @@
       <category term="图片版本控制" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
     
       <category term="图片绝地路径切换" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E7%BB%9D%E5%9C%B0%E8%B7%AF%E5%BE%84%E5%88%87%E6%8D%A2/"/>
+    
+      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -460,9 +460,9 @@
     
       <category term="websharp" scheme="http://yoursite.com/tags/websharp/"/>
     
-      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
       <category term="sass" scheme="http://yoursite.com/tags/sass/"/>
+    
+      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
       <category term="include" scheme="http://yoursite.com/tags/include/"/>
     
@@ -588,13 +588,13 @@
     
       <category term="websharp" scheme="http://yoursite.com/tags/websharp/"/>
     
-      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
-      <category term="haml" scheme="http://yoursite.com/tags/haml/"/>
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
     
       <category term="autocommand" scheme="http://yoursite.com/tags/autocommand/"/>
     
-      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+      <category term="haml" scheme="http://yoursite.com/tags/haml/"/>
     
   </entry>
   
@@ -621,13 +621,13 @@
     
       <category term="websharp" scheme="http://yoursite.com/tags/websharp/"/>
     
-      <category term="haml" scheme="http://yoursite.com/tags/haml/"/>
+      <category term="sass" scheme="http://yoursite.com/tags/sass/"/>
     
       <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
-      <category term="sass" scheme="http://yoursite.com/tags/sass/"/>
-    
       <category term="coffee" scheme="http://yoursite.com/tags/coffee/"/>
+    
+      <category term="haml" scheme="http://yoursite.com/tags/haml/"/>
     
   </entry>
   
