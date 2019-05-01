@@ -16,7 +16,7 @@ categories: 前端开发
 
 软件版本
 
-- alipine 3.8
+- alpine 3.8
 - php 5.6.40
 - nginx 1.15.12
 
