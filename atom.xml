@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-01T11:39:40.946Z</updated>
+  <updated>2019-06-26T15:46:12.453Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,9 +17,39 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>linux主机安全设置</title>
+    <link href="http://yoursite.com//2019/06/linux-host-security.html"/>
+    <id>http://yoursite.com//2019/06/linux-host-security.html</id>
+    <published>2019-06-26T15:08:00.000Z</published>
+    <updated>2019-06-26T15:46:12.453Z</updated>
+    
+    <content type="html"><![CDATA[<p>一直在vps安全方面关注较少，某天服务器异常才注意到安全问题，看日志发现网上恶意攻击的行为很多，学习了一些简单的安全防护方法，整理一下。</p><h3 id="ssh相关"><a href="#ssh相关" class="headerlink" title="ssh相关"></a>ssh相关</h3><p>1.修改默认端口<br>修改ssh默认端口是操作最简单，性价比最高的一条，可以阻挡大量的恶意攻击。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># vim /etc/ssh/sshd_config </span><br><span class="line">#Port [端口]</span><br><span class="line">Port 1234</span><br></pre></td></tr></table></figure><p><em>修改Port前请确认防火墙相应端口已打开，如果修改失败可以先关闭selinux再试</em></p><p>2.使用证书登录，禁用密码登录<br>生成ssh key，将pub key添加到$HOME/.ssh/authorized_keys中。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 使用证书登录</span><br><span class="line">AuthorizedKeysFile .ssh/authorized_keys</span><br><span class="line"># 禁用密码登录</span><br><span class="line">PasswordAuthentication no</span><br></pre></td></tr></table></figure><p>3.禁用root帐户登录<br>添加新用户并使用visudo命令为新用户添加sudo权限，禁用root帐户登录。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PermitRootLogin no</span><br></pre></td></tr></table></figure><h3 id="端口设置白名单"><a href="#端口设置白名单" class="headerlink" title="端口设置白名单"></a>端口设置白名单</h3><p>现在很多vps后台自带端口管理工具，我们在后台中将需要使用的端口开放即可。后台未提供管理工具的，可以使用iptables工具进行设置，为iptables为例：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 允许访问 127.0.0.1</span></span><br><span class="line">iptables -A INPUT -i lo -p all -j ACCEPT</span><br><span class="line"><span class="comment"># 允许ping</span></span><br><span class="line">iptables -A INPUT -p icmp -j ACCEPT</span><br><span class="line"><span class="comment"># 允许ssh，将端口修改为自己的ssh服务端口</span></span><br><span class="line">iptables -A INPUT -p tcp –dport 1234 -j ACCEPT</span><br><span class="line"><span class="comment"># 开启web端口</span></span><br><span class="line">iptables -A INPUT -p tcp –dport 80 -j ACCEPT</span><br><span class="line"><span class="comment"># 禁用配置之外的访问</span></span><br><span class="line">iptables -P INPUT DROP</span><br></pre></td></tr></table></figure><h3 id="查看登录记录"><a href="#查看登录记录" class="headerlink" title="查看登录记录"></a>查看登录记录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">last</span><br></pre></td></tr></table></figure><p>查看登录日志，查看是否有异常登录行为。</p><h3 id="查看ssh日志"><a href="#查看ssh日志" class="headerlink" title="查看ssh日志"></a>查看ssh日志</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail /var/<span class="built_in">log</span>/secure</span><br></pre></td></tr></table></figure><p>查看ssh服务日志，是否有异常登录及密码错误尝试。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一直在vps安全方面关注较少，某天服务器异常才注意到安全问题，看日志发现网上恶意攻击的行为很多，学习了一些简单的安全防护方法，整理一下。&lt;/p&gt;
+&lt;h3 id=&quot;ssh相关&quot;&gt;&lt;a href=&quot;#ssh相关&quot; class=&quot;headerlink&quot; title=&quot;ssh相关&quot;
+      
+    
+    </summary>
+    
+      <category term="linux" scheme="http://yoursite.com/categories/linux/"/>
+    
+    
+      <category term="security" scheme="http://yoursite.com/tags/security/"/>
+    
+      <category term="server" scheme="http://yoursite.com/tags/server/"/>
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>alpine编译php5.6</title>
-    <link href="http://yoursite.com//2019/05/alpine%E7%BC%96%E8%AF%91php5-6/"/>
-    <id>http://yoursite.com//2019/05/alpine编译php5-6/</id>
+    <link href="http://yoursite.com//2019/05/alpine-build-php56.html"/>
+    <id>http://yoursite.com//2019/05/alpine-build-php56.html</id>
     <published>2019-05-01T10:30:00.000Z</published>
     <updated>2019-05-01T11:39:40.946Z</updated>
     
@@ -39,20 +69,20 @@
     
       <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
     
+      <category term="php" scheme="http://yoursite.com/tags/php/"/>
+    
       <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
     
       <category term="alpine" scheme="http://yoursite.com/tags/alpine/"/>
     
       <category term="nginx" scheme="http://yoursite.com/tags/nginx/"/>
     
-      <category term="php" scheme="http://yoursite.com/tags/php/"/>
-    
   </entry>
   
   <entry>
     <title>webpack零配置搭建react开发环境</title>
-    <link href="http://yoursite.com//2019/02/webpack%E9%9B%B6%E9%85%8D%E7%BD%AE%E6%90%AD%E5%BB%BAreact%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
-    <id>http://yoursite.com//2019/02/webpack零配置搭建react开发环境/</id>
+    <link href="http://yoursite.com//2019/02/webpack-zero-config-react-env.html"/>
+    <id>http://yoursite.com//2019/02/webpack-zero-config-react-env.html</id>
     <published>2019-02-26T11:36:00.000Z</published>
     <updated>2019-02-26T12:02:53.649Z</updated>
     
@@ -79,8 +109,8 @@
   
   <entry>
     <title>Yii框架buildCondition的使用</title>
-    <link href="http://yoursite.com//2018/07/yii%E6%A1%86%E6%9E%B6buildcondition%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://yoursite.com//2018/07/yii框架buildcondition的使用/</id>
+    <link href="http://yoursite.com//2018/07/yii-build-condition-usage.html"/>
+    <id>http://yoursite.com//2018/07/yii-build-condition-usage.html</id>
     <published>2018-07-31T10:32:00.000Z</published>
     <updated>2018-07-31T11:21:06.905Z</updated>
     
@@ -109,8 +139,8 @@
   
   <entry>
     <title>Mac平台配置fish shell</title>
-    <link href="http://yoursite.com//2018/01/mac%E5%B9%B3%E5%8F%B0%E9%85%8D%E7%BD%AEfish-shell/"/>
-    <id>http://yoursite.com//2018/01/mac平台配置fish-shell/</id>
+    <link href="http://yoursite.com//2018/01/fish-shell-start.html"/>
+    <id>http://yoursite.com//2018/01/fish-shell-start.html</id>
     <published>2018-01-12T15:34:00.000Z</published>
     <updated>2018-11-12T15:15:18.790Z</updated>
     
@@ -142,8 +172,8 @@
   
   <entry>
     <title>ts+cucumber+webdriverio实现E2E测试</title>
-    <link href="http://yoursite.com//2017/01/ts-cucumber-webdriverio%E5%AE%9E%E7%8E%B0e2e%E6%B5%8B%E8%AF%95/"/>
-    <id>http://yoursite.com//2017/01/ts-cucumber-webdriverio实现e2e测试/</id>
+    <link href="http://yoursite.com//2017/170103.html"/>
+    <id>http://yoursite.com//2017/170103.html</id>
     <published>2017-01-03T11:21:00.000Z</published>
     <updated>2017-08-06T14:36:12.000Z</updated>
     
@@ -171,8 +201,8 @@
   
   <entry>
     <title>typescript使用npm替代typings</title>
-    <link href="http://yoursite.com//2016/12/typescript%E4%BD%BF%E7%94%A8npm%E6%9B%BF%E4%BB%A3typings/"/>
-    <id>http://yoursite.com//2016/12/typescript使用npm替代typings/</id>
+    <link href="http://yoursite.com//2016/161229.html"/>
+    <id>http://yoursite.com//2016/161229.html</id>
     <published>2016-12-29T11:21:00.000Z</published>
     <updated>2017-01-03T14:29:04.000Z</updated>
     
@@ -201,8 +231,8 @@
   
   <entry>
     <title>使用acmd构建jade/sass/livescript开发环境</title>
-    <link href="http://yoursite.com//2016/09/%E4%BD%BF%E7%94%A8acmd%E6%9E%84%E5%BB%BAjade-sass-livescript%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
-    <id>http://yoursite.com//2016/09/使用acmd构建jade-sass-livescript开发环境/</id>
+    <link href="http://yoursite.com//2016/205776.html"/>
+    <id>http://yoursite.com//2016/205776.html</id>
     <published>2016-09-09T15:31:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -234,8 +264,8 @@
   
   <entry>
     <title>使用JS重写API拦截运营商广告</title>
-    <link href="http://yoursite.com//2016/07/%E4%BD%BF%E7%94%A8js%E9%87%8D%E5%86%99api%E6%8B%A6%E6%88%AA%E8%BF%90%E8%90%A5%E5%95%86%E5%B9%BF%E5%91%8A/"/>
-    <id>http://yoursite.com//2016/07/使用js重写api拦截运营商广告/</id>
+    <link href="http://yoursite.com//2016/204189.html"/>
+    <id>http://yoursite.com//2016/204189.html</id>
     <published>2016-07-21T15:21:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -265,8 +295,8 @@
   
   <entry>
     <title>NERDTree插件API小记</title>
-    <link href="http://yoursite.com//2015/12/nerdtree%E6%8F%92%E4%BB%B6api%E5%B0%8F%E8%AE%B0/"/>
-    <id>http://yoursite.com//2015/12/nerdtree插件api小记/</id>
+    <link href="http://yoursite.com//2015/192016.html"/>
+    <id>http://yoursite.com//2015/192016.html</id>
     <published>2015-12-25T02:01:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -297,8 +327,8 @@
   
   <entry>
     <title>基于browser-sync的前端预处理器工作流</title>
-    <link href="http://yoursite.com//2015/05/%E5%9F%BA%E4%BA%8Ebrowser-sync%E7%9A%84%E5%89%8D%E7%AB%AF%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E5%B7%A5%E4%BD%9C%E6%B5%81/"/>
-    <id>http://yoursite.com//2015/05/基于browser-sync的前端预处理器工作流/</id>
+    <link href="http://yoursite.com//2015/94975.html"/>
+    <id>http://yoursite.com//2015/94975.html</id>
     <published>2015-05-29T10:45:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -332,8 +362,8 @@
   
   <entry>
     <title>用vim正则环视优化vim-coloresque插件</title>
-    <link href="http://yoursite.com//2015/03/%E7%94%A8vim%E6%AD%A3%E5%88%99%E7%8E%AF%E8%A7%86%E4%BC%98%E5%8C%96vim-coloresque%E6%8F%92%E4%BB%B6/"/>
-    <id>http://yoursite.com//2015/03/用vim正则环视优化vim-coloresque插件/</id>
+    <link href="http://yoursite.com//2015/81252.html"/>
+    <id>http://yoursite.com//2015/81252.html</id>
     <published>2015-03-20T13:45:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -365,8 +395,8 @@
   
   <entry>
     <title>(锋利web前端开发)vim用autocommand插件编译coffee</title>
-    <link href="http://yoursite.com//2013/05/%E9%94%8B%E5%88%A9web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91-vim%E7%94%A8autocommand%E6%8F%92%E4%BB%B6%E7%BC%96%E8%AF%91coffee/"/>
-    <id>http://yoursite.com//2013/05/锋利web前端开发-vim用autocommand插件编译coffee/</id>
+    <link href="http://yoursite.com//2013/39389.html"/>
+    <id>http://yoursite.com//2013/39389.html</id>
     <published>2013-05-30T12:08:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -384,13 +414,13 @@
       <category term="Vim" scheme="http://yoursite.com/categories/Vim/"/>
     
     
-      <category term="websharp" scheme="http://yoursite.com/tags/websharp/"/>
-    
-      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
       <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
     
+      <category term="websharp" scheme="http://yoursite.com/tags/websharp/"/>
+    
       <category term="coffee" scheme="http://yoursite.com/tags/coffee/"/>
+    
+      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
       <category term="autocommand" scheme="http://yoursite.com/tags/autocommand/"/>
     
@@ -404,8 +434,8 @@
   
   <entry>
     <title>(锋利web前端开发)sass小技巧图片版本号和绝对路径引用</title>
-    <link href="http://yoursite.com//2013/05/%E9%94%8B%E5%88%A9web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91-sass%E5%B0%8F%E6%8A%80%E5%B7%A7%E5%9B%BE%E7%89%87%E7%89%88%E6%9C%AC%E5%8F%B7%E5%92%8C%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%BC%95%E7%94%A8/"/>
-    <id>http://yoursite.com//2013/05/锋利web前端开发-sass小技巧图片版本号和绝对路径引用/</id>
+    <link href="http://yoursite.com//2013/39347.html"/>
+    <id>http://yoursite.com//2013/39347.html</id>
     <published>2013-05-27T12:20:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -427,20 +457,20 @@
     
       <category term="sass" scheme="http://yoursite.com/tags/sass/"/>
     
+      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
       <category term="sass技巧" scheme="http://yoursite.com/tags/sass%E6%8A%80%E5%B7%A7/"/>
     
       <category term="图片版本控制" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
     
       <category term="图片绝地路径切换" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E7%BB%9D%E5%9C%B0%E8%B7%AF%E5%BE%84%E5%88%87%E6%8D%A2/"/>
     
-      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
   </entry>
   
   <entry>
     <title>(锋利web前端开发)sass小技巧extend和include组合运用</title>
-    <link href="http://yoursite.com//2013/05/%E9%94%8B%E5%88%A9web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91-sass%E5%B0%8F%E6%8A%80%E5%B7%A7extend%E5%92%8Cinclude%E7%BB%84%E5%90%88%E8%BF%90%E7%94%A8/"/>
-    <id>http://yoursite.com//2013/05/锋利web前端开发-sass小技巧extend和include组合运用/</id>
+    <link href="http://yoursite.com//2013/39315.html"/>
+    <id>http://yoursite.com//2013/39315.html</id>
     <published>2013-05-22T12:24:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -472,8 +502,8 @@
   
   <entry>
     <title>(Fedora开发环境搭建)添加网易镜像源并更新到最新</title>
-    <link href="http://yoursite.com//2012/09/fedora%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E9%95%9C%E5%83%8F%E6%BA%90%E5%B9%B6%E6%9B%B4%E6%96%B0%E5%88%B0%E6%9C%80%E6%96%B0/"/>
-    <id>http://yoursite.com//2012/09/fedora开发环境搭建-添加网易镜像源并更新到最新/</id>
+    <link href="http://yoursite.com//2012/35664.html"/>
+    <id>http://yoursite.com//2012/35664.html</id>
     <published>2012-09-23T12:43:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -506,8 +536,8 @@
   
   <entry>
     <title>(Fedora开发环境搭建)索引贴</title>
-    <link href="http://yoursite.com//2012/09/fedora%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E7%B4%A2%E5%BC%95%E8%B4%B4/"/>
-    <id>http://yoursite.com//2012/09/fedora开发环境搭建-索引贴/</id>
+    <link href="http://yoursite.com//2012/index_fedora_install.html"/>
+    <id>http://yoursite.com//2012/index_fedora_install.html</id>
     <published>2012-09-23T12:13:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -537,8 +567,8 @@
   
   <entry>
     <title>vim添加coffee和jade支持</title>
-    <link href="http://yoursite.com//2012/07/vim%E6%B7%BB%E5%8A%A0coffee%E5%92%8Cjade%E6%94%AF%E6%8C%81/"/>
-    <id>http://yoursite.com//2012/07/vim添加coffee和jade支持/</id>
+    <link href="http://yoursite.com//2012/34438.html"/>
+    <id>http://yoursite.com//2012/34438.html</id>
     <published>2012-07-07T16:02:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -567,8 +597,8 @@
   
   <entry>
     <title>(锋利web前端开发)使用vim插件autocommand进行整合开发</title>
-    <link href="http://yoursite.com//2012/07/%E9%94%8B%E5%88%A9web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%BD%BF%E7%94%A8vim%E6%8F%92%E4%BB%B6autocommand%E8%BF%9B%E8%A1%8C%E6%95%B4%E5%90%88%E5%BC%80%E5%8F%91/"/>
-    <id>http://yoursite.com//2012/07/锋利web前端开发-使用vim插件autocommand进行整合开发/</id>
+    <link href="http://yoursite.com//2012/34311.html"/>
+    <id>http://yoursite.com//2012/34311.html</id>
     <published>2012-07-07T15:33:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -586,22 +616,22 @@
       <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
       <category term="websharp" scheme="http://yoursite.com/tags/websharp/"/>
+    
+      <category term="haml" scheme="http://yoursite.com/tags/haml/"/>
     
       <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
-      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
-    
       <category term="autocommand" scheme="http://yoursite.com/tags/autocommand/"/>
-    
-      <category term="haml" scheme="http://yoursite.com/tags/haml/"/>
     
   </entry>
   
   <entry>
     <title>(锋利web前端开发)haml/sass/coffee的安装(win平台)</title>
-    <link href="http://yoursite.com//2012/06/%E9%94%8B%E5%88%A9web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91-haml-sass-coffee%E7%9A%84%E5%AE%89%E8%A3%85-win%E5%B9%B3%E5%8F%B0/"/>
-    <id>http://yoursite.com//2012/06/锋利web前端开发-haml-sass-coffee的安装-win平台/</id>
+    <link href="http://yoursite.com//2012/34215.html"/>
+    <id>http://yoursite.com//2012/34215.html</id>
     <published>2012-06-24T12:00:00.000Z</published>
     <updated>2016-12-31T03:07:18.000Z</updated>
     
@@ -621,40 +651,11 @@
     
       <category term="websharp" scheme="http://yoursite.com/tags/websharp/"/>
     
-      <category term="sass" scheme="http://yoursite.com/tags/sass/"/>
-    
-      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="coffee" scheme="http://yoursite.com/tags/coffee/"/>
-    
       <category term="haml" scheme="http://yoursite.com/tags/haml/"/>
     
-  </entry>
-  
-  <entry>
-    <title>(锋利web前端开发)索引贴</title>
-    <link href="http://yoursite.com//2012/06/%E9%94%8B%E5%88%A9web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91-%E7%B4%A2%E5%BC%95%E8%B4%B4/"/>
-    <id>http://yoursite.com//2012/06/锋利web前端开发-索引贴/</id>
-    <published>2012-06-24T11:55:00.000Z</published>
-    <updated>2016-12-31T03:07:18.000Z</updated>
+      <category term="sass" scheme="http://yoursite.com/tags/sass/"/>
     
-    <content type="html"><![CDATA[<p>锋利web前端为一个系列文章，分享利用python、vimscript等语言，整合haml、sass、coffee等实现快速前端开发。</p><ol><li><a href="//2012/06/锋利web前端开发-haml-sass-coffee的安装-win平台/" title="haml/sass/coffee的安装(win平台)">haml/sass/coffee的安装(win平台)</a></li><li><a href="//2012/07/锋利web前端开发-使用vim插件autocommand进行整合开发/" title="使用vim插件autocommand进行整合开发">使用vim插件autocommand进行整合开发</a></li><li><a href="//2013/05/锋利web前端开发-sass小技巧extend和include组合运用/" title="sass小技巧extend和include组合运用">sass小技巧extend和include组合运用</a></li><li><a href="//2013/05/锋利web前端开发-sass小技巧图片版本号和绝对路径引用/" title="sass小技巧图片版本号和绝对路径引用">sass小技巧图片版本号和绝对路径引用</a></li><li><a href="//2013/05/锋利web前端开发-vim用autocommand插件编译coffee/" title="vim用autocommand插件编译coffee">vim用autocommand插件编译coffee</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;锋利web前端为一个系列文章，分享利用python、vimscript等语言，整合haml、sass、coffee等实现快速前端开发。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;//2012/06/锋利web前端开发-haml-sass-coffee的安装-win平台/&quot;
-      
-    
-    </summary>
-    
-      <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="websharp" scheme="http://yoursite.com/tags/websharp/"/>
+      <category term="coffee" scheme="http://yoursite.com/tags/coffee/"/>
     
       <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
