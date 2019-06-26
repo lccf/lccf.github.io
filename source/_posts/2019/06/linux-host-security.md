@@ -1,6 +1,6 @@
 ---
 title: linux主机安全设置
-date: 2019-03-11 23:08
+date: 2019-06-26 23:08
 tags:
 - security
 - server
@@ -8,17 +8,18 @@ tags:
 categories: linux
 ---
 
-之前购买过vps做测试用，安全方面关注较少，某天服务器异常才注意到安全问题（后来证明是小主机商稳定性不佳），看日志发现网上恶意攻击的行为很多，学习了一些简单的安全防护方法，整理一下。
+一直在vps安全方面关注较少，某天服务器异常才注意到安全问题，看日志发现网上恶意攻击的行为很多，学习了一些简单的安全防护方法，整理一下。
 
 ### ssh相关
 1.修改默认端口
 修改ssh默认端口是操作最简单，性价比最高的一条，可以阻挡大量的恶意攻击。
 
 ```conf
+# vim /etc/ssh/sshd_config 
 #Port [端口]
-Port 59527
+Port 1234
 ```
-*修改Port前请确认防火墙相应端口已打开*
+*修改Port前请确认防火墙相应端口已打开，如果修改失败可以先关闭selinux再试*
 
 2.使用证书登录，禁用密码登录
 生成ssh key，将pub key添加到$HOME/.ssh/authorized_keys中。
@@ -47,7 +48,7 @@ iptables -A INPUT -i lo -p all -j ACCEPT
 # 允许ping
 iptables -A INPUT -p icmp -j ACCEPT
 # 允许ssh，将端口修改为自己的ssh服务端口
-iptables -A INPUT -p tcp –dport 22 -j ACCEPT
+iptables -A INPUT -p tcp –dport 1234 -j ACCEPT
 # 开启web端口
 iptables -A INPUT -p tcp –dport 80 -j ACCEPT
 # 禁用配置之外的访问
