@@ -5,7 +5,7 @@ tags:
 - security
 - server
 - linux
-categories: linux
+categories: Linux
 ---
 
 一直在vps安全方面关注较少，某天服务器异常才注意到安全问题，看日志发现网上恶意攻击的行为很多，学习了一些简单的安全防护方法，整理一下。

@@ -6,7 +6,7 @@ tags:
 - server
 - linux
 - mi router
-categories: linux
+categories: Linux
 ---
 
 之前一直用TeamViewer作为远程软件，有一段时间帐号被识别为企业帐号连上之后频繁断开，花了点时间在小米路由器3和VPS上配置FRP，实现远程开机和远程桌面。
