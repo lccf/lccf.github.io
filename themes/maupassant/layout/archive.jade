@@ -1,16 +1,17 @@
 extends base
 
 block title
-  - function groupBy(collect, getKey) {
-  -   var result = {};
-  -   for(var i=0; i<collect.length; i++) {
-  -      var item = collect[i];
-  -      var key = getKey(item);
-  -      result[key] = result[key] || [];
-  -      result[key].push(item)
-  -   }
-  -   return result;
-  - }
+  -
+    function groupBy(collect, getKey) {
+      var result = {};
+      for(var i=0; i<collect.length; i++) {
+         var item = collect[i];
+         var key = getKey(item);
+         result[key] = result[key] || [];
+         result[key].push(item)
+      }
+      return result;
+    }
   if page.category
      title= page.category + ' | ' + config.title
   if page.tag
