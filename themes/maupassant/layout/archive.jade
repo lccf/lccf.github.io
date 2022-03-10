@@ -1,6 +1,16 @@
 extends base
 
 block title
+  - function groupBy(collect, getKey) {
+  -   var result = {};
+  -   for(var i=0; i<collect.length; i++) {
+  -      var item = collect[i];
+  -      var key = getKey(item);
+  -      result[key] = result[key] || [];
+  -      result[key].push(item)
+  -   }
+  -   return result;
+  - }
   if page.category
      title= page.category + ' | ' + config.title
   if page.tag
@@ -13,7 +23,7 @@ block content
   .post
     .post-archive
         //Use lodash to classify posts. See https://lodash.com/docs#groupBy
-        each posts, year in _.groupBy(page.posts.toArray(), function(p){return -p.date.format('YYYY')})
+        each posts, year in groupBy(page.posts.toArray(), function(p){return -p.date.format('YYYY')})
           h2= -year
           ul.listing
             for post in posts
