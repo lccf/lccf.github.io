@@ -7,7 +7,7 @@ tags:
 categories: 前端开发
 ---
 
-锋利web前端为一个系列文章，分享利用python、vimscript等语言，整合haml、sass、coffee等实现快速前端开发。
+锋利web前端为一个系列文章，分享利用python、vim script等语言，整合haml、sass、coffee等实现快速前端开发。
 
 1. {% post_link 2012/34215 haml/sass/coffee的安装(win平台) %}
 2. {% post_link 2012/34311 使用vim插件autocommand进行整合开发 %}
