@@ -27,14 +27,14 @@ mkdir celljs-fullstack-app
 ```yaml
 # docs/task.yml
 tasks:
-  name: 创建celljs全栈项目
-  status: none
-  content: |
-    调用celljs-creator创建celljs项目
-    - celljs版本为3.7.1，所有@celljs下的包版本需保持一致
-    - 后端模式为 api
-    - 前端框架为 react
-    - 手动安装依赖
+  - name: 创建celljs全栈项目
+    status: done
+    content: |
+      调用celljs-creator创建celljs项目
+      - celljs版本为3.7.1，所有@celljs下的包版本需保持一致
+      - 后端模式为 api
+      - 前端框架为 react
+      - 手动安装依赖
 ```
 
 4.打开claude code，确认skills成功加载，输出以下提示语：
