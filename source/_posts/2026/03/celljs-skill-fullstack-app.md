@@ -51,16 +51,16 @@ tasks:
 项目创建完提示如下：
 
 ```text
-● 已完成celljs项目创建。项目结构如下：                                                                                
-                                                                                                                      
-  cc-react-fullstack/                                                                                                 
-  ├── package.json          # 项目依赖配置                                                                            
-  ├── tsconfig.json         # TypeScript配置                                                                          
-  ├── cell.yml              # Cell配置                                                                                
-  ├── cell-local.yml        # 本地Cell配置                                                                            
-  ├── docs/                                                                                                           
-  │   └── celljs-refrences.md                                                                                         
-  └── src/                                                                                                            
+● 已完成celljs项目创建。项目结构如下：
+
+  celljs-fullstack-app/
+  ├── package.json          # 项目依赖配置
+  ├── tsconfig.json         # TypeScript配置
+  ├── cell.yml              # Cell配置
+  ├── cell-local.yml        # 本地Cell配置
+  ├── docs/
+  │   └── celljs-refrences.md
+  └── src/
       ├── hooks/
       │   └── webpack.ts    # Webpack钩子配置
       ├── node/            # 后端代码 (api模式)
