@@ -10,6 +10,9 @@ categories: 前端开发
 
 [celljs](https://github.com/cellbang/cell) 是我很喜欢的一款框架，非常适合用来做全栈(nodejs后端+前端)的项目。介绍一下使用skill来创建一个全栈项目。
 
+### 更新
+- 2026/04/18 更新 skill 安装方式
+
 ### 创建项目
 
 1.创建项目目录
@@ -20,7 +23,11 @@ mkdir celljs-fullstack-app
 
 2.安装 celljs-creator skill
 
-从 [https://github.com/lccf/celljs-creator-skill](https://github.com/lccf/celljs-creator-skill) 下载 zip 包，解压后将 celljs-creator 放到项目下的 `.claude/skills` 目录
+使用 `vercel-labs/skills` 来安装
+
+```bash
+npx skills add lccf/celljs-creator-skill --skill celljs-creator -a claude-code
+```
 
 3.创建任务文档
 
