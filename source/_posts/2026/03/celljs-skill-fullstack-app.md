@@ -12,6 +12,7 @@ categories: 前端开发
 
 ### 更新
 - 2026/04/18 更新 skill 安装方式
+- 2026/10/16 更新 skill repo 地址
 
 ### 创建项目
 
@@ -26,7 +27,7 @@ mkdir celljs-fullstack-app
 使用 `vercel-labs/skills` 来安装
 
 ```bash
-npx skills add lccf/celljs-creator-skill --skill celljs-creator -a claude-code
+npx skills add lccf/skill-repo --skill celljs-creator -a claude-code
 ```
 
 3.创建任务文档
@@ -85,5 +86,5 @@ tasks:
 - src/browser 目录存放前端代码，service 目录里有访问接口的示例代码
 
 ### 链接：
-- [celljs-creator-skill](https://github.com/lccf/celljs-creator-skill)
+- [celljs-creator-skill](https://github.com/lccf/skill-repo)
 - [celljs](https://github.com/cellbang/cell)
